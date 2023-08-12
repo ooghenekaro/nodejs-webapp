@@ -15,8 +15,8 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 335871625378.dkr.ecr.eu-west-2.amazonaws.com
-      - IMAGE_REPO_NAME=335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejswebapp
+      - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 335871625378.dkr.ecr.us-west-2.amazonaws.com
+      - IMAGE_REPO_NAME=232777167307.dkr.ecr.us-west-2.amazonaws.com/hans-repo
       - IMAGE_TAG=latest
   build:
     commands:
@@ -31,6 +31,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
-      - aws eks --region eu-west-2 update-kubeconfig --name k8s-boy
+      - aws eks --region us-west-2 update-kubeconfig --name k8s-boy
       - echo Push the latest image to cluster
       - kubectl apply -f deployment.yml
